@@ -6,13 +6,7 @@
                 <img src="../assets/logo.png" alt="" />
             </div>
             <!-- 登录表单 -->
-            <el-form
-                ref="loginFormRef"
-                :model="loginForm"
-                :rules="loginFormRules"
-                label-width="0px"
-                class="login_form"
-            >
+            <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="0px" class="login_form">
                 <!-- 用户名 -->
                 <el-form-item label="" prop="username">
                     <el-input v-model="loginForm.username" prefix-icon="iconfont icon-user"></el-input>
@@ -70,7 +64,6 @@ export default {
             this.$refs.loginFormRef.validate(async (valid) => {
                 if (!valid) return
                 const { data: res } = await this.$http.post('login', this.loginForm)
-                console.log(res)
                 if (res.meta.status !== 200) return this.$message.error('登陆失败')
                 this.$message.success('登陆成功')
                 // 存储token到sessionStorage中
