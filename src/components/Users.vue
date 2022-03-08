@@ -1,4 +1,5 @@
 <template>
+    <!-- 用户列表 -->
     <div>
         <!-- 面包屑导航区 -->
         <el-breadcrumb separator="/">
@@ -54,8 +55,40 @@
                         ></el-button>
                         <!-- 分配角色 -->
                         <el-tooltip effect="dark" content="Top Center 分配角色" placement="top" :enterable="false">
-                            <el-button type="warning" icon="el-icon-setting" size="mini"></el-button>
+                            <el-button
+                                type="warning"
+                                icon="el-icon-setting"
+                                size="mini"
+                                @click="setRole(scope.row)"
+                            ></el-button>
                         </el-tooltip>
+                        <!-- 分配角色对话框 -->
+                        <el-dialog
+                            title="分配角色"
+                            :visible.sync="setRoleDialogVisible"
+                            width="50%"
+                            @close="setRoleDialogClose"
+                        >
+                            <div>
+                                <p>当前用户：{{ userInfo.username }}</p>
+                                <p>当前角色：{{ userInfo.role_name }}</p>
+                                <p>
+                                    分配新角色：
+                                    <el-select v-model="selectRoleId" placeholder="请选择">
+                                        <el-option
+                                            v-for="item in rolesList"
+                                            :key="item.id"
+                                            :label="item.roleName"
+                                            :value="item.id"
+                                        ></el-option>
+                                    </el-select>
+                                </p>
+                            </div>
+                            <span slot="footer" class="dialog-footer">
+                                <el-button @click="setRoleDialogVisible = false">取 消</el-button>
+                                <el-button type="primary" @click="saveRoleInfo">确 定</el-button>
+                            </span>
+                        </el-dialog>
                     </template>
                 </el-table-column>
             </el-table>
@@ -115,6 +148,29 @@
         </el-dialog>
     </div>
 </template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script>
 export default {
@@ -225,7 +281,14 @@ export default {
                         trigger: 'blur'
                     }
                 ]
-            }
+            }, // 控制分配角色对话框的，显示与隐藏
+            setRoleDialogVisible: false,
+            // 用户行信息
+            userInfo: {},
+            // 所有角色列表
+            rolesList: [],
+            //分配角色，选择分配新角色
+            selectRoleId: []
         }
     },
 
@@ -337,10 +400,69 @@ export default {
                 this.$message.success('删除用户成功')
                 this.getUserList()
             }
+        },
+        // 点击打开分配角色对话框
+        async setRole(userInfo) {
+            this.userInfo = userInfo
+            // 获取所有角色列表
+            const { data: res } = await this.$http.get('roles')
+            if (res.meta.status !== 200) {
+                return this.$message.error('角色列表获取失败')
+            }
+            this.rolesList = res.data
+            this.setRoleDialogVisible = true
+        },
+        // 分配角色 点击确定  保存信息
+        async saveRoleInfo() {
+            if (!this.selectRoleId) {
+                return this.$message.error('请选择要分配的角色')
+            }
+            const { data: res } = await this.$http.put(`users/${this.userInfo.id}/role`, { rid: this.selectRoleId })
+            if (res.meta.status !== 200) {
+                return this.$message.error('分配角色列表获取失败')
+            }
+            this.$message.success('分配角色成功')
+            this.getUserList()
+            this.setRoleDialogVisible = false
+        },
+        // 关闭分配角色弹窗
+        setRoleDialogClose() {
+            this.selectRoleId = ''
+            this.userInfo = {}
         }
     }
 }
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <style lang="less" scoped>
 .text {

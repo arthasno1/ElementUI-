@@ -27,7 +27,9 @@ import {
     Tooltip,
     Pagination,
     Dialog,
-    MessageBox
+    MessageBox,
+    Tag,
+    Tree
 } from 'element-ui'
 // 单独引入message
 Vue.prototype.$message = Message
@@ -58,3 +60,5 @@ Vue.use(Switch)
 Vue.use(Tooltip)
 Vue.use(Pagination)
 Vue.use(Dialog)
+Vue.use(Tag)
+Vue.use(Tree)
