@@ -194,7 +194,7 @@ export default {
         }
         return {
             // 获取用户列表的参数
-            queryInfo: { query: '', pagenum: 1, pagesize: 2 },
+            queryInfo: { query: '', pagenum: 1, pagesize: 10 },
             userList: [],
             total: 0,
             // 添加用户对话框的显示与隐藏

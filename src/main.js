@@ -15,6 +15,11 @@ axios.interceptors.request.use((config) => {
     config.headers.Authorization = sessionStorage.getItem('token')
     return config
 })
+
+// 树形表格组件引入和注册组件
+import ZkTable from 'vue-table-with-tree-grid'
+Vue.component('tree-table', ZkTable)
+
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
 new Vue({
