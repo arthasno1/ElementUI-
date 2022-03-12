@@ -30,7 +30,11 @@ import {
     MessageBox,
     Tag,
     Tree,
-    Cascader
+    Cascader,
+    Alert,
+    Tabs,
+    TabsPane,
+    TabPane
 } from 'element-ui'
 // 单独引入message
 Vue.prototype.$message = Message
@@ -64,3 +68,6 @@ Vue.use(Dialog)
 Vue.use(Tag)
 Vue.use(Tree)
 Vue.use(Cascader)
+Vue.use(Alert)
+Vue.use(Tabs)
+Vue.use(TabPane)

@@ -28,19 +28,13 @@
             >
                 <!-- 是否有效 列 -->
                 <template slot="isok" slot-scope="scope">
-                    <i
-                        class="el-icon-success"
-                        v-if="scope.row.cat_deleted === false"
-                        style="color: lightgreen"
-                    ></i>
+                    <i class="el-icon-success" v-if="scope.row.cat_deleted === false" style="color: lightgreen"></i>
                     <i class="el-icon-error" v-else style="color: red"></i>
                 </template>
                 <!-- 排序  列-->
                 <template slot="order" slot-scope="scope">
                     <el-tag size="mini" v-if="scope.row.cat_level === 0">一级</el-tag>
-                    <el-tag type="success" size="mini" v-else-if="scope.row.cat_level === 1">
-                        二级
-                    </el-tag>
+                    <el-tag type="success" size="mini" v-else-if="scope.row.cat_level === 1">二级</el-tag>
                     <el-tag type="warning" size="mini" v-else>三级</el-tag>
                 </template>
                 <!-- 操作 列 -->
@@ -64,12 +58,7 @@
         <el-dialog title="添加分类" :visible.sync="addCateDialogVisible" width="50%">
             <!-- 添加分类表单 -->
             <!-- 子级分类 -->
-            <el-form
-                :model="addCateForm"
-                :rules="addCateFormRule"
-                ref="addCateFormRef"
-                label-width="100px"
-            >
+            <el-form :model="addCateForm" :rules="addCateFormRule" ref="addCateFormRef" label-width="100px">
                 <el-form-item label="分类名称" prop="cat_name">
                     <el-input v-model="addCateForm.cat_name"></el-input>
                 </el-form-item>
@@ -229,10 +218,10 @@ export default {
         // 点击取消添加分类
         addCateDialogClose() {
             this.$refs.addCateFormRef.resetFields()
-            this.addCateDialogVisible = false
             this.selectedKeys = []
             this.addCateForm.cat_level = 0
             this.addCateForm.cat_pid = 0
+            this.addCateDialogVisible = false
         }
     }
 }
