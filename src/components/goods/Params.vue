@@ -2,9 +2,7 @@
     <!-- 顶部面包屑 -->
     <div>
         <el-breadcrumb separator="/">
-            <el-breadcrumb-item :to="{ path: '/home' }">
-                首页
-            </el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
             <el-breadcrumb-item>商品管理</el-breadcrumb-item>
             <el-breadcrumb-item>分类参数</el-breadcrumb-item>
         </el-breadcrumb>
@@ -58,9 +56,7 @@
                                     v-model="scope.row.inputValue"
                                     ref="saveTagInput"
                                     size="small"
-                                    @keyup.enter.native="
-                                        handleInputConfirm(scope.row)
-                                    "
+                                    @keyup.enter.native="handleInputConfirm(scope.row)"
                                     @blur="handleInputConfirm(scope.row)"
                                 ></el-input>
                                 <el-button
@@ -74,10 +70,7 @@
                             </template>
                         </el-table-column>
                         <el-table-column type="index"></el-table-column>
-                        <el-table-column
-                            label="参数名称"
-                            prop="attr_name"
-                        ></el-table-column>
+                        <el-table-column label="参数名称" prop="attr_name"></el-table-column>
                         <el-table-column label="操作">
                             <template slot-scope="scope">
                                 <div>
@@ -85,9 +78,7 @@
                                         type="primary"
                                         icon="el-icon-edit"
                                         size="mini"
-                                        @click="
-                                            showEditDialog(scope.row.attr_id)
-                                        "
+                                        @click="showEditDialog(scope.row.attr_id)"
                                     >
                                         修改
                                     </el-button>
@@ -133,9 +124,7 @@
                                         v-model="scope.row.inputValue"
                                         ref="saveTagInput"
                                         size="small"
-                                        @keyup.enter.native="
-                                            handleInputConfirm(scope.row)
-                                        "
+                                        @keyup.enter.native="handleInputConfirm(scope.row)"
                                         @blur="handleInputConfirm(scope.row)"
                                     ></el-input>
                                     <el-button
@@ -150,10 +139,7 @@
                             </el-table-column>
                         </el-table-column>
                         <el-table-column type="index"></el-table-column>
-                        <el-table-column
-                            label="参数名称"
-                            prop="attr_name"
-                        ></el-table-column>
+                        <el-table-column label="参数名称" prop="attr_name"></el-table-column>
                         <el-table-column label="操作">
                             <template slot-scope="scope">
                                 <div>
@@ -161,9 +147,7 @@
                                         type="primary"
                                         icon="el-icon-edit"
                                         size="mini"
-                                        @click="
-                                            showEditDialog(scope.row.attr_id)
-                                        "
+                                        @click="showEditDialog(scope.row.attr_id)"
                                     >
                                         修改
                                     </el-button>
@@ -189,12 +173,7 @@
             width="50%"
             @close="addDialogClosed"
         >
-            <el-form
-                :model="addForm"
-                :rules="addFormRules"
-                ref="ruleFormRef"
-                label-width="100px"
-            >
+            <el-form :model="addForm" :rules="addFormRules" ref="ruleFormRef" label-width="100px">
                 <el-form-item :label="titleText" prop="attr_name">
                     <el-input v-model="addForm.attr_name"></el-input>
                 </el-form-item>
@@ -211,12 +190,7 @@
             width="50%"
             @close="editDialogClosed"
         >
-            <el-form
-                :model="editForm"
-                :rules="editFormRules"
-                ref="editFormRef"
-                label-width="100px"
-            >
+            <el-form :model="editForm" :rules="editFormRules" ref="editFormRef" label-width="100px">
                 <el-form-item :label="titleText" prop="attr_name">
                     <el-input v-model="editForm.attr_name"></el-input>
                 </el-form-item>
@@ -243,7 +217,7 @@ export default {
                 value: 'cat_id',
                 label: 'cat_name',
                 children: 'children',
-                expandTrigger: 'hover'
+                expandTrigger: 'hover',
             },
             selectCateKeys: [],
             // tabs相关数据
@@ -256,7 +230,7 @@ export default {
             addDialogVisible: false,
             // 添加表单数据
             addForm: {
-                attr_name: ''
+                attr_name: '',
             },
             // 添加表单验证
             addFormRules: {
@@ -264,9 +238,9 @@ export default {
                     {
                         required: true,
                         message: '请输入参数名称',
-                        trigger: 'blur'
-                    }
-                ]
+                        trigger: 'blur',
+                    },
+                ],
             },
             // 修改弹窗开关
             editDialogVisible: false,
@@ -276,10 +250,10 @@ export default {
                     {
                         required: true,
                         message: '请输入参数名称',
-                        trigger: 'blur'
-                    }
-                ]
-            }
+                        trigger: 'blur',
+                    },
+                ],
+            },
         }
     },
 
@@ -290,12 +264,11 @@ export default {
     methods: {
         async getCateList() {
             const { data: res } = await this.$http.get('categories')
-            if (res.meta.status !== 200)
-                return this.$message.error('获取商品分类数据失败')
+            if (res.meta.status !== 200) return this.$message.error('获取商品分类数据失败')
             this.cateList = res.data
         },
         // 选择框发生变化触发
-        handleChange(value) {
+        handleChange() {
             this.getParamsData()
         },
         // tabs相关事件
@@ -308,18 +281,12 @@ export default {
                 this.manyTableData = []
                 this.onlyTableData = []
             } else {
-                const { data: res } = await this.$http.get(
-                    `categories/${this.cateId}/attributes`,
-                    {
-                        params: { sel: this.activeName }
-                    }
-                )
-                if (res.meta.status !== 200)
-                    return this.$message.error('获取分类参数失败')
+                const { data: res } = await this.$http.get(`categories/${this.cateId}/attributes`, {
+                    params: { sel: this.activeName },
+                })
+                if (res.meta.status !== 200) return this.$message.error('获取分类参数失败')
                 res.data.forEach((item) => {
-                    item.attr_vals = item.attr_vals
-                        ? item.attr_vals.split(' ')
-                        : []
+                    item.attr_vals = item.attr_vals ? item.attr_vals.split(' ') : []
                     item.inputVisible = false
                     item.inputValue = ''
                 })
@@ -344,8 +311,8 @@ export default {
                     `categories/${this.cateId}/attributes`,
                     {
                         attr_name: this.addForm.attr_name,
-                        attr_sel: this.activeName
-                    }
+                        attr_sel: this.activeName,
+                    },
                 )
 
                 if (res.meta.status !== 201) {
@@ -361,11 +328,10 @@ export default {
             const { data: res } = await this.$http.get(
                 `categories/${this.cateId}/attributes/${attr_id}`,
                 {
-                    params: { attr_sel: this.activeName }
-                }
+                    params: { attr_sel: this.activeName },
+                },
             )
-            if (res.meta.status !== 200)
-                return this.$message.error('获取修改数据失败')
+            if (res.meta.status !== 200) return this.$message.error('获取修改数据失败')
             this.editForm = res.data
             this.editDialogVisible = true
         },
@@ -381,31 +347,26 @@ export default {
                     `categories/${this.cateId}/attributes/${this.editForm.attr_id}`,
                     {
                         attr_name: this.editForm.attr_name,
-                        attr_sel: this.activeName
-                    }
+                        attr_sel: this.activeName,
+                    },
                 )
-                if (res.meta.status !== 200)
-                    return this.$message.error('获取参数失败')
+                if (res.meta.status !== 200) return this.$message.error('获取参数失败')
                 this.$message.success('修改成功')
                 this.getParamsData()
                 this.editDialogVisible = false
             })
         },
         async removeParams(attr_id) {
-            const confirmResult = await this.$confirm(
-                '此操作将永久这条数据, 是否继续?',
-                '提示',
-                {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
-                    type: 'warning'
-                }
-            ).catch((error) => {
+            const confirmResult = await this.$confirm('此操作将永久这条数据, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning',
+            }).catch((error) => {
                 return error
             })
             if (confirmResult === 'confirm') {
                 const { data: res } = await this.$http.delete(
-                    `categories/${this.cateId}/attributes/${attr_id}`
+                    `categories/${this.cateId}/attributes/${attr_id}`,
                 )
                 if (res.meta.status !== 200)
                     return this.$message.error('删除数据失败，获取数据失败')
@@ -431,8 +392,8 @@ export default {
                 {
                     attr_name: row.attr_name,
                     attr_sel: row.attr_sel,
-                    attr_vals: row.attr_vals.join(' ')
-                }
+                    attr_vals: row.attr_vals.join(' '),
+                },
             )
             if (res.meta.status !== 200) {
                 return this.$message.error('编辑参数列表获取失败')
@@ -449,7 +410,7 @@ export default {
             this.$nextTick(() => {
                 this.$refs.saveTagInput.$refs.input.focus()
             })
-        }
+        },
     },
 
     computed: {
@@ -473,23 +434,10 @@ export default {
             } else {
                 return '静态属性'
             }
-        }
-    }
+        },
+    },
 }
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

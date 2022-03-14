@@ -10,8 +10,11 @@
     "dependencies": {
         "axios": "^0.26.0",
         "core-js": "^3.6.5",
+        "dayjs": "^1.10.8",
         "element-ui": "^2.4.5",
+        "lodash": "^4.17.21",
         "vue": "^2.6.11",
+        "vue-quill-editor": "^3.0.6",
         "vue-router": "^3.2.0",
         "vue-table-with-tree-grid": "^0.2.4",
         "vuex": "^3.6.2"
@@ -36,10 +39,10 @@
     },
     "prettier": {
         "singleQuote": true,
-        "printWidth": 80,
+        "printWidth": 100,
         "proseWrap": "always",
         "semi": false,
-        "trailingComma": "none",
+        "trailingComma": "all",
         "htmlWhitespaceSensitivity": "ignore"
     }
 }
