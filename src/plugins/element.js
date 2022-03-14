@@ -39,6 +39,8 @@ import {
     Checkbox,
     CheckboxGroup,
     Upload,
+    Timeline,
+    TimelineItem,
 } from 'element-ui'
 // 单独引入message
 Vue.prototype.$message = Message
@@ -80,3 +82,5 @@ Vue.use(Step)
 Vue.use(Checkbox)
 Vue.use(CheckboxGroup)
 Vue.use(Upload)
+Vue.use(Timeline)
+Vue.use(TimelineItem)
