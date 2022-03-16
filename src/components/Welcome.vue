@@ -4,15 +4,15 @@
 
 <script>
 export default {
-    name: 'Welcome',
+  name: 'Welcome',
 
-    data() {
-        return {}
-    },
+  data () {
+    return {}
+  },
 
-    mounted() {},
+  mounted () {},
 
-    methods: {}
+  methods: {}
 }
 </script>
 

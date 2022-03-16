@@ -21,43 +21,43 @@ import _ from 'lodash'
 export default {
   name: 'Reports',
 
-  data() {
+  data () {
     return {
       // 需要合并的数据
       options: {
         title: {
-          text: '用户来源',
+          text: '用户来源'
         },
         tooltip: {
           trigger: 'axis',
           axisPointer: {
             type: 'cross',
             label: {
-              backgroundColor: '#E9EEF3',
-            },
-          },
+              backgroundColor: '#E9EEF3'
+            }
+          }
         },
         grid: {
           left: '3%',
           right: '4%',
           bottom: '3%',
-          containLabel: true,
+          containLabel: true
         },
         xAxis: [
           {
-            boundaryGap: false,
-          },
+            boundaryGap: false
+          }
         ],
         yAxis: [
           {
-            type: 'value',
-          },
-        ],
-      },
+            type: 'value'
+          }
+        ]
+      }
     }
   },
 
-  async mounted() {
+  async mounted () {
     const { data: res } = await this.$http.get('reports/type/1')
     if (res.meta.status !== 200) {
       return this.$message.error('获取订单数据失败')
@@ -69,7 +69,7 @@ export default {
     myChart.setOption(result)
   },
 
-  methods: {},
+  methods: {}
 }
 </script>
 

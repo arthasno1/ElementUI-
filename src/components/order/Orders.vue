@@ -118,13 +118,13 @@ import cityData from './citydata.js'
 export default {
   name: 'Orders',
 
-  data() {
+  data () {
     return {
       queryInfo: {
         query: '',
         pagenum: 1,
         // 每页显示多少条信息
-        pagesize: 10,
+        pagesize: 10
       },
       // 总页数
       total: 1,
@@ -133,23 +133,23 @@ export default {
       addressVisible: false,
       addressForm: {
         address1: [],
-        address2: '',
+        address2: ''
       },
       addressFormRules: {
         address1: [
           {
             required: true,
             message: '请选择地址',
-            trigger: 'blur',
-          },
+            trigger: 'blur'
+          }
         ],
         address2: [
           {
             required: true,
             message: '请输入详细地址',
-            trigger: 'blur',
-          },
-        ],
+            trigger: 'blur'
+          }
+        ]
       },
       cityData: cityData,
       progressVisible: false,
@@ -158,72 +158,72 @@ export default {
           time: '2018-05-10 09:39:00',
           ftime: '2018-05-10 09:39:00',
           context: '已签收,感谢使用顺丰,期待再次为您服务',
-          location: '',
+          location: ''
         },
         {
           time: '2018-05-10 08:23:00',
           ftime: '2018-05-10 08:23:00',
           context: '[北京市]北京海淀育新小区营业点派件员 顺丰速运 95338正在为您派件',
-          location: '',
+          location: ''
         },
         {
           time: '2018-05-10 07:32:00',
           ftime: '2018-05-10 07:32:00',
           context: '快件到达 [北京海淀育新小区营业点]',
-          location: '',
+          location: ''
         },
         {
           time: '2018-05-10 02:03:00',
           ftime: '2018-05-10 02:03:00',
           context: '快件在[北京顺义集散中心]已装车,准备发往 [北京海淀育新小区营业点]',
-          location: '',
+          location: ''
         },
         {
           time: '2018-05-09 23:05:00',
           ftime: '2018-05-09 23:05:00',
           context: '快件到达 [北京顺义集散中心]',
-          location: '',
+          location: ''
         },
         {
           time: '2018-05-09 21:21:00',
           ftime: '2018-05-09 21:21:00',
           context: '快件在[北京宝胜营业点]已装车,准备发往 [北京顺义集散中心]',
-          location: '',
+          location: ''
         },
         {
           time: '2018-05-09 13:07:00',
           ftime: '2018-05-09 13:07:00',
           context: '顺丰速运 已收取快件',
-          location: '',
+          location: ''
         },
         {
           time: '2018-05-09 12:25:03',
           ftime: '2018-05-09 12:25:03',
           context: '卖家发货',
-          location: '',
+          location: ''
         },
         {
           time: '2018-05-09 12:22:24',
           ftime: '2018-05-09 12:22:24',
           context: '您的订单将由HLA（北京海淀区清河中街店）门店安排发货。',
-          location: '',
+          location: ''
         },
         {
           time: '2018-05-08 21:36:04',
           ftime: '2018-05-08 21:36:04',
           context: '商品已经下单',
-          location: '',
-        },
-      ],
+          location: ''
+        }
+      ]
     }
   },
 
-  created() {
+  created () {
     this.getOrderList()
   },
 
   methods: {
-    async getOrderList() {
+    async getOrderList () {
       const { data: res } = await this.$http.get('orders', { params: this.queryInfo })
       if (res.meta.status !== 200) {
         return this.$message.error('订单列表获取失败')
@@ -233,28 +233,28 @@ export default {
       this.orderList = res.data.goods
     },
     // 底部分页相关事件
-    handleSizeChange(newSize) {
+    handleSizeChange (newSize) {
       this.queryInfo.pagesize = newSize
       this.getOrderList()
     },
-    handleCurrentChange(newPage) {
+    handleCurrentChange (newPage) {
       this.queryInfo.pagenum = newPage
       this.getOrderList()
     },
-    showDialog() {
+    showDialog () {
       this.addressVisible = true
     },
-    handleChange() {
+    handleChange () {
       console.log(this.addressForm.address1)
     },
-    addressDialogClosed() {
+    addressDialogClosed () {
       this.$refs.addressFormRule.resetFields()
     },
-    async showProgressDialog() {
+    async showProgressDialog () {
       this.progressVisible = true
       console.log(this.progressInfo)
-    },
-  },
+    }
+  }
 }
 </script>
 

@@ -222,7 +222,6 @@ export default {
           item.attr_vals = item.attr_vals.length === 0 ? [] : item.attr_vals.split(' ')
         })
         this.manyTableData = res.data
-        console.log(this.manyTableData)
       } else if (this.activeIndex === '2') {
         const { data: res } = await this.$http.get(`categories/${this.cateId}/attributes`, {
           params: {
@@ -234,12 +233,10 @@ export default {
         }
 
         this.onlyTableData = res.data
-        console.log(res.data)
       }
     },
     // 上传文件相关事件
     handleRemove(file) {
-      console.log(file)
       const filePath = file.response.data.tmp_path
       const i = this.addForm.pics.findIndex((x) => {
         return x.pic === filePath
@@ -252,7 +249,6 @@ export default {
       this.addForm.pics.push(picInfo)
     },
     handlePreview(file) {
-      console.log(123)
       this.previewPath = file.response.data.url
       this.previewDialogVisible = true
     },
@@ -279,7 +275,6 @@ export default {
           this.addForm.attrs.push(newInfo)
         })
         form.attrs = this.addForm.attrs
-        console.log(form)
 
         // 发起请求添加商品
         // 商品的名称，必须是唯一的

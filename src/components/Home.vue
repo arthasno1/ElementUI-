@@ -59,49 +59,49 @@
 
 <script>
 export default {
-    name: 'Home',
-    data() {
-        return {
-            // 左侧菜单数据
-            menuList: [],
-            iconObj: {
-                125: 'iconfont icon-users',
-                103: 'iconfont icon-tijikongjian',
-                101: 'iconfont icon-shangpin',
-                102: 'iconfont icon-danju',
-                145: 'iconfont icon-baobiao'
-            },
-            // 控制左侧菜单栏折叠与展开
-            isCollapse: false,
-            // 被激活的链接地址
-            activePath: ''
-        }
-    },
-    created() {
-        this.getMenuList()
-        this.activePath = sessionStorage.getItem('activePath')
-    },
-    methods: {
-        login() {
-            sessionStorage.clear('token')
-            this.$router.push('/login')
-        },
-        // 获取所有的菜单
-        async getMenuList() {
-            const { data: res } = await this.$http.get('menus')
-            if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
-            this.menuList = res.data
-        },
-        // 点击按钮控制左侧菜单折叠与展开
-        toggleCollapse() {
-            this.isCollapse = !this.isCollapse
-        },
-        // 点击链接激活变色
-        saveNameState(activePath) {
-            sessionStorage.setItem('activePath', activePath)
-            this.activePath = sessionStorage.getItem('activePath')
-        }
+  name: 'Home',
+  data () {
+    return {
+      // 左侧菜单数据
+      menuList: [],
+      iconObj: {
+        125: 'iconfont icon-users',
+        103: 'iconfont icon-tijikongjian',
+        101: 'iconfont icon-shangpin',
+        102: 'iconfont icon-danju',
+        145: 'iconfont icon-baobiao'
+      },
+      // 控制左侧菜单栏折叠与展开
+      isCollapse: false,
+      // 被激活的链接地址
+      activePath: ''
     }
+  },
+  created () {
+    this.getMenuList()
+    this.activePath = sessionStorage.getItem('activePath')
+  },
+  methods: {
+    login () {
+      sessionStorage.clear('token')
+      this.$router.push('/login')
+    },
+    // 获取所有的菜单
+    async getMenuList () {
+      const { data: res } = await this.$http.get('menus')
+      if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
+      this.menuList = res.data
+    },
+    // 点击按钮控制左侧菜单折叠与展开
+    toggleCollapse () {
+      this.isCollapse = !this.isCollapse
+    },
+    // 点击链接激活变色
+    saveNameState (activePath) {
+      sessionStorage.setItem('activePath', activePath)
+      this.activePath = sessionStorage.getItem('activePath')
+    }
+  }
 }
 </script>
 
@@ -146,4 +146,3 @@ export default {
     cursor: pointer;
 }
 </style>
-

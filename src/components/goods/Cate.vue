@@ -150,7 +150,7 @@ export default {
       },
       // 父级分类数据
       parentCateList: [],
-      //父级级联选择器的配置对象
+      // 父级级联选择器的配置对象
       cascaderProps: {
         value: 'cat_id',
         label: 'cat_name',
@@ -200,13 +200,11 @@ export default {
     },
     // 选择项发生变化触发
     parentCateChange() {
-      console.log(this.selectedKeys)
       if (this.selectedKeys.length > 0) {
         // 父类id赋值
         this.addCateForm.cat_pid = this.selectedKeys[this.selectedKeys.length - 1]
         // 为当前分类等级赋值
         this.addCateForm.cat_level = this.selectedKeys.length
-        return
       } else {
         this.addCateForm.cat_pid = 0
         this.addCateForm.cat_level = 0
@@ -216,7 +214,7 @@ export default {
     // 点击确定添加分类
     async addCate() {
       this.$refs.addCateFormRef.validate((valid) => {
-        if (!valid) return
+        if (!valid) return false
       })
       const { data: res } = await this.$http.post('categories', this.addCateForm)
       if (res.meta.status !== 201) return this.$message.error('分类菜单获取失败')

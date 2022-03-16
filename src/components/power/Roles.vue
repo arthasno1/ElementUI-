@@ -15,7 +15,7 @@
       </el-row>
       <!-- 角色列表区 -->
       <el-table :data="roleList" border stripe>
-        <!-- 展开列 -->
+        <!-- 箭头展开列 -->
         <el-table-column type="expand">
           <template slot-scope="scope">
             <el-row
@@ -231,7 +231,7 @@ export default {
     setRightEditClose() {
       this.defKeys = []
     },
-    //分配权限 确定按钮
+    // 分配权限 确定按钮
     async allotRight() {
       this.SetRightDialogVisible = true
       const keys = [
