@@ -1,24 +1,18 @@
-# vue_shop
+# ElementUI 后台管理
 
-## Project setup
-```
-npm install
-```
+数据在 vue-show-server 文件夹中运行利用 phpStudy 运行 app.js
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## 使用技术
 
-### Compiles and minifies for production
-```
-npm run build
-```
+- **vue 全家桶**
+- **ElementUI 框架**
 
-### Lints and fixes files
-```
-npm run lint
-```
+## 项目展示
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+![](./%E9%A1%B9%E7%9B%AE%E9%A2%84%E8%A7%88%E5%9B%BE/1.png)
+![](./%E9%A1%B9%E7%9B%AE%E9%A2%84%E8%A7%88%E5%9B%BE/2.png)
+![](./%E9%A1%B9%E7%9B%AE%E9%A2%84%E8%A7%88%E5%9B%BE/3.png)
+![](./%E9%A1%B9%E7%9B%AE%E9%A2%84%E8%A7%88%E5%9B%BE/4.png)
+![](./%E9%A1%B9%E7%9B%AE%E9%A2%84%E8%A7%88%E5%9B%BE/5.png)
+![](./%E9%A1%B9%E7%9B%AE%E9%A2%84%E8%A7%88%E5%9B%BE/6.png)
+![](./%E9%A1%B9%E7%9B%AE%E9%A2%84%E8%A7%88%E5%9B%BE/7.png)

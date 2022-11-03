@@ -25,22 +25,22 @@ import 'nprogress/nprogress.css'
 // 设置axios请求根路径
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
 axios.interceptors.request.use((config) => {
-    NProgress.start()
-    config.headers.Authorization = sessionStorage.getItem('token')
-    return config
+  NProgress.start()
+  config.headers.Authorization = sessionStorage.getItem('token')
+  return config
 })
 axios.interceptors.response.use((config) => {
-    NProgress.done()
-    return config
+  NProgress.done()
+  return config
 })
 Vue.component('tree-table', ZkTable)
 Vue.filter('dateFormat', (originVal) => {
-    return dayjs(originVal).format('YYYY-MM-DD HH:mm:ss')
+  return dayjs(originVal).format('YYYY-MM-DD HH:mm:ss')
 })
 Vue.prototype.$http = axios
 Vue.config.productionTip = false // for bubble theme
 Vue.use(VueQuillEditor)
 new Vue({
-    router,
-    render: (h) => h(App),
+  router,
+  render: (h) => h(App)
 }).$mount('#app')

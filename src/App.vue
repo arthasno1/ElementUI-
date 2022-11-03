@@ -1,22 +1,21 @@
 <template>
-    <div id="app">
-        <!-- 路由占位 -->
-        <router-view></router-view>
-    </div>
+  <div id="app">
+    <!-- 路由占位 -->
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'App',
-  data () {
+  data() {
     return {}
   },
 
-  mounted () {},
+  mounted() {},
 
   methods: {}
 }
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

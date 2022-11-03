@@ -18,11 +18,7 @@
         <!-- 箭头展开列 -->
         <el-table-column type="expand">
           <template slot-scope="scope">
-            <el-row
-              v-for="(item1, i1) in scope.row.children"
-              :class="['btBottom', i1 === 0 ? 'btTop' : '', 'rowLeft', 'vcenter']"
-              :key="item1.id"
-            >
+            <el-row v-for="(item1, i1) in scope.row.children" :class="['btBottom', i1 === 0 ? 'btTop' : '', 'rowLeft', 'vcenter']" :key="item1.id">
               <!-- 渲染一级权限 -->
               <el-col :span="5">
                 <el-tag closable @close="removeRightById(scope.row, item1.id)">
@@ -33,11 +29,7 @@
               </el-col>
               <!-- 渲染二级权限，三级权限 -->
               <el-col :span="19">
-                <el-row
-                  :class="[i2 === 0 ? '' : 'btTop', 'vcenter']"
-                  v-for="(item2, i2) in item1.children"
-                  :key="item2.id"
-                >
+                <el-row :class="[i2 === 0 ? '' : 'btTop', 'vcenter']" v-for="(item2, i2) in item1.children" :key="item2.id">
                   <el-col :span="6">
                     <el-tag closable @close="removeRightById(scope.row, item2.id)" type="success">
                       {{ item2.authName }}
@@ -46,13 +38,7 @@
                   </el-col>
                   <!-- 三级权限 -->
                   <el-col :span="18">
-                    <el-tag
-                      closable
-                      @close="removeRightById(scope.row, item3.id)"
-                      v-for="item3 in item2.children"
-                      :key="item3.id"
-                      type="warning"
-                    >
+                    <el-tag closable @close="removeRightById(scope.row, item3.id)" v-for="item3 in item2.children" :key="item3.id" type="warning">
                       {{ item3.authName }}
                     </el-tag>
                   </el-col>
@@ -69,14 +55,7 @@
           <template slot-scope="scope">
             <el-button type="primary" icon="el-icon-edit" size="mini">搜索</el-button>
             <el-button type="danger" icon="el-icon-delete" size="mini">删除</el-button>
-            <el-button
-              type="warning"
-              icon="el-icon-setting"
-              size="mini"
-              @click="showSetRightDialog(scope.row)"
-            >
-              分配权限
-            </el-button>
+            <el-button type="warning" icon="el-icon-setting" size="mini" @click="showSetRightDialog(scope.row)"> 分配权限 </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -99,22 +78,9 @@
       </span>
     </el-dialog>
     <!-- 分配权限 -->
-    <el-dialog
-      title="分配权限"
-      :visible.sync="SetRightDialogVisible"
-      width="50%"
-      @close="setRightEditClose"
-    >
+    <el-dialog title="分配权限" :visible.sync="SetRightDialogVisible" width="50%" @close="setRightEditClose">
       <!-- 树结构 -->
-      <el-tree
-        :data="rightList"
-        :props="treeProps"
-        show-checkbox
-        node-key="id"
-        :default-expand-all="true"
-        :default-checked-keys="defKeys"
-        ref="treeRef"
-      ></el-tree>
+      <el-tree :data="rightList" :props="treeProps" show-checkbox node-key="id" :default-expand-all="true" :default-checked-keys="defKeys" ref="treeRef"></el-tree>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="allotRight">确定</el-button>
         <el-button @click="SetRightDialogVisible = false">取消</el-button>
@@ -135,7 +101,7 @@ export default {
       // 添加角色列表
       editRole: {
         roleName: '',
-        roleDesc: '',
+        roleDesc: ''
       },
       // 添加角色规则
       editRoleRules: {
@@ -143,28 +109,28 @@ export default {
           {
             required: true,
             message: '请输入角色名',
-            trigger: 'blur',
+            trigger: 'blur'
           },
           {
             min: 3,
             max: 10,
             message: '用户名的长度在3-10个字符之间',
-            trigger: 'blur',
-          },
+            trigger: 'blur'
+          }
         ],
         roleDesc: [
           {
             required: true,
             message: '请输入角色描述',
-            trigger: 'blur',
+            trigger: 'blur'
           },
           {
             min: 6,
             max: 15,
             message: '角色描述长度在6-15个字符之间',
-            trigger: 'blur',
-          },
-        ],
+            trigger: 'blur'
+          }
+        ]
       },
       // 分配权限窗口开关
       SetRightDialogVisible: false,
@@ -173,12 +139,12 @@ export default {
       // 树解构数据
       treeProps: {
         children: 'children',
-        label: 'authName',
+        label: 'authName'
       },
       // 默认选中节点ID值数组
       defKeys: [],
       // 角色id
-      roleId: {},
+      roleId: {}
     }
   },
   created() {
@@ -198,12 +164,13 @@ export default {
       const confirmResult = await this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
-        type: 'warning',
+        type: 'warning'
       }).catch((error) => error)
       if (confirmResult !== 'confirm') return this.$message.info('取消删除')
       const { data: res } = await this.$http.delete(`roles/${role.id}/rights/${rightId}`)
       if (res.meta.status !== 200) this.$message.error('获取删除角色权限失败')
       role.children = res.data
+      // this.getRoleList()
       this.$message.success('删除成功')
     },
     // 展示分配权限对话框
@@ -234,18 +201,15 @@ export default {
     // 分配权限 确定按钮
     async allotRight() {
       this.SetRightDialogVisible = true
-      const keys = [
-        ...this.$refs.treeRef.getCheckedKeys(),
-        ...this.$refs.treeRef.getHalfCheckedKeys(),
-      ]
+      const keys = [...this.$refs.treeRef.getCheckedKeys(), ...this.$refs.treeRef.getHalfCheckedKeys()]
       const idStr = keys.join(',')
       const { data: res } = await this.$http.post(`roles/${this.roleId}/rights`, { rids: idStr })
       if (res.meta.status !== 200) return this.$message.error('获取角色授权失败')
       this.$message.success(res.meta.msg)
       this.getRoleList()
       this.SetRightDialogVisible = false
-    },
-  },
+    }
+  }
 }
 </script>
 
