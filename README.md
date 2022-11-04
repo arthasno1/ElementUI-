@@ -1,6 +1,8 @@
 # ElementUI 后台管理
 
-数据在 vue-show-server 文件夹中运行利用 phpStudy 运行 app.js
+- 数据在文件夹 vue-show-server 中
+- 利用 phpStudy 软件 运行 app.js
+- phpStudy 官网 https://www.xp.cn/
 
 ## 使用技术
 
